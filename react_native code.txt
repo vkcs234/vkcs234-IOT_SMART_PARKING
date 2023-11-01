@@ -1,0 +1,22 @@
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+function ParkingAvailabilityScreen() {
+const [availabilityData, setAvailabilityData] = useState(null);
+useEffect(() => {
+// Make an HTTP request to your Python server (replace with your server URL)
+fetch('http://your-raspberrypi-server:port/availability')
+.then((response) => response.json())
+.then((data) => setAvailabilityData(data))
+.catch((error) => console.error(error));
+}, []);
+return (
+<View>
+{availabilityData ? (
+<Text>Parking Availability: {availabilityData.available}</Text>
+) : (
+<Text>Loading data...</Text>
+)}
+</View>
+);
+}
+export default ParkingAvailabilityScreen;
